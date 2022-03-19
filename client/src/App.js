@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import "./App.css";
-import "./components/navbar.css"
-
+import Navbar from "./components/Navbar"
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null, value:0 };
 
@@ -55,12 +54,7 @@ class App extends Component {
     return (
       <div className="App">
         <div>
-          <ul>
-            <li><a href="#home">Vista</a></li>
-            <li><a href="#imageupload">Image Upload</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li  style={{float:"right"}}><a className="active" href="#about">{this.state.accounts[0]}</a></li>
-          </ul>
+          <Navbar address={this.state.accounts[0]}/>
         </div>
       </div>
     );
