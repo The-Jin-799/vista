@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@metamask/detect-provider": "^1.2.0"
+    "@metamask/detect-provider": "^1.2.0",
+    "ipfs-api": "^26.1.2"
   }
 }
