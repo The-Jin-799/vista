@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import ipfs from "./ipfs";
 class ImageUploadForm extends Component {
   state = {
+    title: "",
+    price: 0,
     buffer: null,
     ipfsHash: null,
     accounts: this.props.accounts,
     contract: this.props.contract,
-    storageValue: "",
+    storageValue: null,
   };
 
   runExample = async (ipfsHash) => {
@@ -14,7 +16,9 @@ class ImageUploadForm extends Component {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
-    await contract.methods.set(ipfsHash).send({ from: accounts[0] });
+    await contract.methods
+      .set(ipfsHash, this.state.title, this.state.price)
+      .send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.get().call();
@@ -34,7 +38,7 @@ class ImageUploadForm extends Component {
     };
   };
 
-  onSubmit = (event, runExample) => {
+  onSubmit = (event) => {
     event.preventDefault();
     ipfs.files.add(this.state.buffer, async (error, result) => {
       if (error) {
@@ -47,6 +51,14 @@ class ImageUploadForm extends Component {
       //let CID = await "helloworld"
       await this.runExample(this.state.ipfsHash);
     });
+  };
+
+  handleImageTitle = (event) => {
+    this.setState({ title: event.target.value });
+  };
+
+  handlePrice = (event) => {
+    this.setState({ price: event.target.value });
   };
 
   render() {
@@ -68,6 +80,16 @@ class ImageUploadForm extends Component {
               <h2>Upload Image</h2>
               <form onSubmit={this.onSubmit}>
                 <input type="file" onChange={this.captureFile} />
+                <input
+                  type="text"
+                  placeholder="Image Title"
+                  onChange={this.handleImageTitle}
+                />
+                <input
+                  type="number"
+                  placeholder="Price in Gwei"
+                  onChange={this.handlePrice}
+                />
                 <input type="submit" />
               </form>
               <p>{this.state.storageValue}</p>
