@@ -8,7 +8,9 @@ class ImageUploadForm extends Component {
     ipfsHash: null,
     accounts: this.props.accounts,
     contract: this.props.contract,
-    storageValue: null,
+    storageValue: [],
+    uploadedImages: [],
+    image1hash: [],
   };
 
   runExample = async (ipfsHash) => {
@@ -27,6 +29,11 @@ class ImageUploadForm extends Component {
     this.setState({ storageValue: response });
   };
 
+  getUploadedImages = async () => {
+    const uploadedImages = await this.state.contract.methods.get().call();
+    this.setState({ uploadedImages });
+  };
+
   captureFile = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -36,6 +43,15 @@ class ImageUploadForm extends Component {
       this.setState({ buffer: Buffer(reader.result) });
       console.log("buffer", this.state.buffer);
     };
+  };
+
+  componentDidMount = async () => {
+    await this.getUploadedImages();
+    console.log(this.state.uploadedImages[0].hash);
+    let ImageArray = this.state.uploadedImages.map((obj) => {
+      return obj.hash;
+    });
+    this.setState({ image1hash: ImageArray });
   };
 
   onSubmit = (event) => {
@@ -93,6 +109,15 @@ class ImageUploadForm extends Component {
                 <input type="submit" />
               </form>
               <p>{this.state.storageValue}</p>
+              <h1>uploads</h1>
+              {this.state.image1hash.map((hash) => {
+                return (
+                  <img
+                    style={{ width: "200px", height: "150px" }}
+                    src={`https://ipfs.io/ipfs/${hash}`}
+                  />
+                );
+              })}
             </div>
           </div>
         </main>
