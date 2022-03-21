@@ -4,6 +4,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import ImageUploadForm from "./components/imageUploadForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -62,10 +63,21 @@ class App extends Component {
       <div className="App">
         <div>
           <Navbar address={this.state.accounts[0]} />
-          <ImageUploadForm
-            accounts={this.state.accounts}
-            contract={this.state.contract}
-          />
+
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route
+                path="uploadform"
+                element={
+                  <ImageUploadForm
+                    accounts={this.state.accounts}
+                    contract={this.state.contract}
+                  />
+                }
+              />
+            </Routes>
+          </BrowserRouter>
         </div>
       </div>
     );
