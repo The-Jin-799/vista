@@ -5,7 +5,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import ImageUploadForm from "./components/imageUploadForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Home from "./components/home";
+import Profile from "./components/profile";
 class App extends Component {
   state = {
     storageValue: 0,
@@ -63,14 +64,22 @@ class App extends Component {
       <div className="App">
         <div>
           <Navbar address={this.state.accounts[0]} />
-
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<App />} />
+              <Route path="/" element={<Home />} />
               <Route
-                path="uploadform"
+                path="imageupload"
                 element={
                   <ImageUploadForm
+                    accounts={this.state.accounts}
+                    contract={this.state.contract}
+                  />
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <Profile
                     accounts={this.state.accounts}
                     contract={this.state.contract}
                   />
