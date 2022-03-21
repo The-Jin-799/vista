@@ -29,10 +29,10 @@ class ImageUploadForm extends Component {
     this.setState({ storageValue: response });
   };
 
-  getUploadedImages = async () => {
-    const uploadedImages = await this.state.contract.methods.get().call();
-    this.setState({ uploadedImages });
-  };
+  // getUploadedImages = async () => {
+  //   const uploadedImages = await this.state.contract.methods.get().call();
+  //   this.setState({ uploadedImages });
+  // };
 
   captureFile = (event) => {
     event.preventDefault();
@@ -45,14 +45,14 @@ class ImageUploadForm extends Component {
     };
   };
 
-  componentDidMount = async () => {
-    await this.getUploadedImages();
-    console.log(this.state.uploadedImages[0].hash);
-    let ImageArray = this.state.uploadedImages.map((obj) => {
-      return obj.hash;
-    });
-    this.setState({ image1hash: ImageArray });
-  };
+  // componentDidMount = async () => {
+  //   await this.getUploadedImages();
+  //   console.log(this.state.uploadedImages[0].hash);
+  //   let ImageArray = this.state.uploadedImages.map((obj) => {
+  //     return obj.hash;
+  //   });
+  //   this.setState({ image1hash: ImageArray });
+  // };
 
   onSubmit = (event) => {
     event.preventDefault();
@@ -109,15 +109,6 @@ class ImageUploadForm extends Component {
                 <input type="submit" />
               </form>
               <p>{this.state.storageValue}</p>
-              <h1>uploads</h1>
-              {this.state.image1hash.map((hash) => {
-                return (
-                  <img
-                    style={{ width: "200px", height: "150px" }}
-                    src={`https://ipfs.io/ipfs/${hash}`}
-                  />
-                );
-              })}
             </div>
           </div>
         </main>
