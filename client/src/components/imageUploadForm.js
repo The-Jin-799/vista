@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ipfs from "./ipfs";
+import "./styles/uploadForm.css";
 class ImageUploadForm extends Component {
   state = {
     title: "",
@@ -95,18 +96,43 @@ class ImageUploadForm extends Component {
               />
               <h2>Upload Image</h2>
               <form onSubmit={this.onSubmit}>
-                <input type="file" onChange={this.captureFile} />
-                <input
+                <div class="col-3">
+                  <input
+                    class="effect-2"
+                    type="file"
+                    onChange={this.captureFile}
+                  />
+                  <span class="focus-border"></span>
+                </div>
+                <div className="col-3">
+                  <input
+                    className="effect-2"
+                    type="text"
+                    placeholder="Image Title"
+                    onChange={this.handleImageTitle}
+                  />
+                  <span class="focus-border"></span>
+                </div>
+                {/* <input
                   type="text"
                   placeholder="Image Title"
                   onChange={this.handleImageTitle}
-                />
-                <input
+                /> */}
+                <div class="col-3">
+                  <input
+                    className="effect-2"
+                    type="number"
+                    placeholder="Price in Gwei"
+                    onChange={this.handlePrice}
+                  />
+                  <span class="focus-border"></span>
+                </div>
+                {/* <input
                   type="number"
                   placeholder="Price in Gwei"
                   onChange={this.handlePrice}
-                />
-                <input type="submit" />
+                /> */}
+                <input className="form-submit-button" type="submit" />
               </form>
               <p>{this.state.storageValue}</p>
             </div>
