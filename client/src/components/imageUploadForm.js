@@ -12,6 +12,7 @@ class ImageUploadForm extends Component {
     storageValue: [],
     uploadedImages: [],
     image1hash: [],
+    imageURL: "",
   };
 
   runExample = async (ipfsHash) => {
@@ -38,6 +39,9 @@ class ImageUploadForm extends Component {
   captureFile = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
+    this.setState({
+      imageURL: URL.createObjectURL(file),
+    });
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
@@ -86,14 +90,15 @@ class ImageUploadForm extends Component {
             <div className="pure-u-1-1">
               <h1>Your Image</h1>
               <p>This image is stored on IPFS & The Ethereum Blockchain!</p>
-              <img
-                style={{ width: "400px", height: "250px" }}
-                src={
-                  this.state.ipfsHash &&
-                  `https://ipfs.io/ipfs/${this.state.ipfsHash}`
-                }
-                alt=""
-              />
+              {this.state.imageURL && (
+                <img
+                  id="uploadedimage"
+                  style={{ width: "400px", height: "250px" }}
+                  src={this.state.imageURL}
+                  alt=""
+                />
+              )}
+
               <h2>Upload Image</h2>
               <form onSubmit={this.onSubmit}>
                 <div class="col-3">
@@ -134,7 +139,7 @@ class ImageUploadForm extends Component {
                 /> */}
                 <input className="form-submit-button" type="submit" />
               </form>
-              <p>{this.state.storageValue}</p>
+              {/* <p>{this.state.storageValue}</p> */}
             </div>
           </div>
         </main>

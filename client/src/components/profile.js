@@ -27,9 +27,15 @@ class Profile extends Component {
       <div>
         <h1>Uploads</h1>
         <div className="masonry">
-          {this.state.image1hash.map((hash) => (
+          {this.state.image1hash.map((hash, i) => (
             <div class="mItem">
-              <img class="img" src={`https://ipfs.io/ipfs/${hash}`} alt="" />
+              <img
+                id={i}
+                class="img"
+                src={`https://ipfs.io/ipfs/${hash}`}
+                alt=""
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
