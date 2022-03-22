@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./styles/imageUpload.css";
 class Profile extends Component {
   state = {
     uploadedImages: [],
@@ -25,18 +25,16 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <h1>uploads</h1>
-        {this.state.image1hash.map((hash) => {
-          return (
-            <img
-              style={{ width: "200px", height: "150px" }}
-              src={`https://ipfs.io/ipfs/${hash}`}
-            />
-          );
-        })}
+        <h1>Uploads</h1>
+        <div className="masonry">
+          {this.state.image1hash.map((hash) => (
+            <div class="mItem">
+              <img class="img" src={`https://ipfs.io/ipfs/${hash}`} alt="" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 }
-
 export default Profile;
