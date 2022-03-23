@@ -88,8 +88,10 @@ class ImageUploadForm extends Component {
         <main className="container">
           <div className="pure-g">
             <div className="pure-u-1-1">
-              <h1>Your Image</h1>
-              <p>This image is stored on IPFS & The Ethereum Blockchain!</p>
+              <h1 className="upldheader">Upload Image</h1>
+              <p className="upldpara">
+                This image is stored on IPFS & The Ethereum Blockchain!
+              </p>
               {this.state.imageURL && (
                 <img
                   id="uploadedimage"
@@ -99,7 +101,6 @@ class ImageUploadForm extends Component {
                 />
               )}
 
-              <h2>Upload Image</h2>
               <form onSubmit={this.onSubmit}>
                 <div class="col-3">
                   <input
