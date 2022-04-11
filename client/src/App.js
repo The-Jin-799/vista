@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import "./App.css";
-import "./components/navbar.css"
-
+import Navbar from "./components/Navbar";
+import ImageUploadForm from "./components/imageUploadForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/home";
+import Profile from "./components/profile";
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null, value:0 };
+  state = {
+    storageValue: 0,
+    web3: null,
+    accounts: null,
+    contract: null,
+  };
 
   componentDidMount = async () => {
     try {
@@ -20,7 +28,7 @@ class App extends Component {
       const deployedNetwork = SimpleStorageContract.networks[networkId];
       const instance = new web3.eth.Contract(
         SimpleStorageContract.abi,
-        deployedNetwork && deployedNetwork.address,
+        deployedNetwork && deployedNetwork.address
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -29,24 +37,24 @@ class App extends Component {
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
+        `Failed to load web3, accounts, or contract. Check console for details.`
       );
       console.error(error);
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  // runExample = async () => {
+  //   const { accounts, contract } = this.state;
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(this.state.value).send({ from: accounts[0] });
-    console.log(accounts[0])
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+  //   // Stores a given value, 5 by default.
+  //   await contract.methods.set(this.state.value).send({ from: accounts[0] });
+  //   console.log(accounts[0]);
+  //   // Get the value from the contract to prove it worked.
+  //   const response = await contract.methods.get().call();
 
-    // Update state with the result.
-    this.setState({ storageValue: response });
-  };
+  //   // Update state with the result.
+  //   this.setState({ storageValue: response });
+  // };
 
   render() {
     if (!this.state.web3) {
@@ -55,12 +63,30 @@ class App extends Component {
     return (
       <div className="App">
         <div>
-          <ul>
-            <li><a href="#home">Vista</a></li>
-            <li><a href="#imageupload">Image Upload</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li  style={{float:"right"}}><a className="active" href="#about">{this.state.accounts[0]}</a></li>
-          </ul>
+          <Navbar address={this.state.accounts[0]} />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="imageupload"
+                element={
+                  <ImageUploadForm
+                    accounts={this.state.accounts}
+                    contract={this.state.contract}
+                  />
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <Profile
+                    accounts={this.state.accounts}
+                    contract={this.state.contract}
+                  />
+                }
+              />
+            </Routes>
+          </BrowserRouter>
         </div>
       </div>
     );
