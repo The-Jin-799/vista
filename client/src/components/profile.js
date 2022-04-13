@@ -40,7 +40,7 @@ class Profile extends Component {
               <img
                 key={i}
                 class="img"
-                src={`https://gateway.ipfs.io/ipfs/${hash}`}
+                src={`https://cloudflare-ipfs.com/ipfs/${hash}`}
                 alt=""
                 loading="lazy"
               />
