@@ -9,30 +9,38 @@ class Profile extends Component {
   };
 
   getUploadedImages = async () => {
-    const uploadedImages = await this.state.contract.methods.get().call();
+    const uploadedImages = await this.state.contract.methods
+      .get()
+      .call({ from: this.state.accounts[0] });
     this.setState({ uploadedImages });
   };
 
   componentDidMount = async () => {
     await this.getUploadedImages();
-    console.log(this.state.uploadedImages[0].hash);
-    let ImageArray = this.state.uploadedImages.map((obj) => {
-      return obj.hash;
-    });
-    this.setState({ image1hash: ImageArray });
+    if (this.state.uploadedImages.length > 0) {
+      console.log(this.state.uploadedImages[0].hash);
+      let ImageArray = this.state.uploadedImages.map((obj) => {
+        return obj.hash;
+      });
+      this.setState({ image1hash: ImageArray });
+    }
   };
 
   render() {
     return (
       <div>
-        <h1>Uploads</h1>
+        {this.state.uploadedImages.length > 0 ? (
+          <h1>Uploads</h1>
+        ) : (
+          <h1>No Uploads</h1>
+        )}
         <div className="masonry">
           {this.state.image1hash.map((hash, i) => (
-            <div class="mItem">
+            <div key={i} class="mItem">
               <img
-                id={i}
+                key={i}
                 class="img"
-                src={`https://ipfs.io/ipfs/${hash}`}
+                src={`https://gateway.ipfs.io/ipfs/${hash}`}
                 alt=""
                 loading="lazy"
               />
