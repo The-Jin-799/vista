@@ -103,13 +103,13 @@ class ImageUploadForm extends Component {
               )}
 
               <form onSubmit={this.onSubmit}>
-                <div class="col-3">
+                <div className="col-3">
                   <input
-                    class="effect-2"
+                    className="effect-2"
                     type="file"
                     onChange={this.captureFile}
                   />
-                  <span class="focus-border"></span>
+                  <span className="focus-border"></span>
                 </div>
                 <div className="col-3">
                   <input
@@ -118,21 +118,21 @@ class ImageUploadForm extends Component {
                     placeholder="Image Title"
                     onChange={this.handleImageTitle}
                   />
-                  <span class="focus-border"></span>
+                  <span className="focus-border"></span>
                 </div>
                 {/* <input
                   type="text"
                   placeholder="Image Title"
                   onChange={this.handleImageTitle}
                 /> */}
-                <div class="col-3">
+                <div className="col-3">
                   <input
                     className="effect-2"
                     type="number"
                     placeholder="Price in Gwei"
                     onChange={this.handlePrice}
                   />
-                  <span class="focus-border"></span>
+                  <span className="focus-border"></span>
                 </div>
                 {/* <input
                   type="number"

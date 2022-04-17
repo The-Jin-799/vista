@@ -11,16 +11,17 @@
     border: none;
     outline: 0;
     padding: 12px;
-    color: white;
-    background-color: #000;
+    color: #000;
+    background-color: #FFB319;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+    font-weight: bolder;
   }
   
   .card button:hover {
-    opacity: 0.7;
+    background-color: #FFE194;
   }
 
   .title{

@@ -7,6 +7,7 @@ class Profile extends Component {
     accounts: this.props.accounts,
     contract: this.props.contract,
     image1hash: [],
+    buttonState: true,
   };
 
   getUploadedImages = async () => {
@@ -39,38 +40,76 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        {this.state.uploadedImages.length > 0 ? (
-          <h1>Uploads</h1>
-        ) : (
-          <h1>No Uploads</h1>
+        <div className="profileButtons">
+          <button
+            className={
+              this.state.buttonState
+                ? "profileButton stateactive"
+                : "profileButton"
+            }
+            onClick={() => {
+              this.state.buttonState
+                ? this.setState({ buttonState: true })
+                : this.setState({ buttonState: true });
+            }}
+          >
+            Uploaded Images
+          </button>
+          <button
+            className={
+              this.state.buttonState
+                ? "profileButton"
+                : "profileButton stateactive"
+            }
+            onClick={() => {
+              this.state.buttonState
+                ? this.setState({ buttonState: false })
+                : this.setState({ buttonState: false });
+            }}
+          >
+            Purchased Images
+          </button>
+        </div>
+        {this.state.buttonState && (
+          <div>
+            {this.state.uploadedImages.length > 0 ? (
+              <h1> Uploaded Images</h1>
+            ) : (
+              <h1>No Uploads</h1>
+            )}
+            <div className="masonry">
+              {this.state.image1hash.map((hash, i) => (
+                <div key={i} className="mItem">
+                  <img
+                    key={i}
+                    className="img"
+                    src={`https://cloudflare-ipfs.com/ipfs/${hash}`}
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         )}
-        <div className="masonry">
-          {this.state.image1hash.map((hash, i) => (
-            <div key={i} className="mItem">
-              <img
-                key={i}
-                className="img"
-                src={`https://cloudflare-ipfs.com/ipfs/${hash}`}
-                alt=""
-                loading="lazy"
-              />
+        {!this.state.buttonState && (
+          <div>
+            <h1> Purchased Images</h1>
+            <div className="masonry">
+              {this.state.boughtImages.map((image, i) => (
+                <div key={i} className="mItem">
+                  <img
+                    key={i}
+                    className="img"
+                    src={`https://cloudflare-ipfs.com/ipfs/${image.hash}`}
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <h1>Images Purchased</h1>
-        <div className="masonry">
-          {this.state.boughtImages.map((image, i) => (
-            <div key={i} className="mItem">
-              <img
-                key={i}
-                className="img"
-                src={`https://cloudflare-ipfs.com/ipfs/${image.hash}`}
-                alt=""
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     );
   }

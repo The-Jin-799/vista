@@ -7,15 +7,24 @@ class Home extends Component {
     allImages: [],
     accounts: this.props.accounts,
     contract: this.props.contract,
+    boughtImages: [],
   };
 
   componentDidMount = async () => {
+    await this.getBoughtImages();
     const allImages = await this.state.contract.methods
       .getALL()
       .call({ from: this.state.accounts[0] });
     this.setState({ allImages });
     //console.log(allImages);
     console.log(this.state.allImages);
+  };
+
+  getBoughtImages = async () => {
+    const boughtImages = await this.state.contract.methods
+      .getBoughtImages()
+      .call({ from: this.state.accounts[0] });
+    this.setState({ boughtImages });
   };
 
   buyImage = (i, price) => {
@@ -33,7 +42,11 @@ class Home extends Component {
       <div className="masonry">
         {this.state.allImages.map(
           (image, i) =>
-            image.uploader !== this.state.accounts[0] && (
+            image.uploader !== this.state.accounts[0] &&
+            // console.log(
+            !this.state.boughtImages.some(
+              (boughtimage) => image.hash === boughtimage.hash
+            ) && (
               <div key={i} className="mItem">
                 <div className="card">
                   <img
