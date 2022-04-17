@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import web3 from "web3";
 import ipfs from "./ipfs";
 import "./styles/uploadForm.css";
 class ImageUploadForm extends Component {
@@ -18,10 +19,10 @@ class ImageUploadForm extends Component {
   runExample = async (ipfsHash) => {
     console.log(ipfsHash);
     const { accounts, contract } = this.state;
-
+    const priceInWei = web3.utils.toWei(this.state.price, "gwei");
     // Stores a given value, 5 by default.
     await contract.methods
-      .set(ipfsHash, this.state.title, this.state.price)
+      .set(ipfsHash, this.state.title, priceInWei)
       .send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
