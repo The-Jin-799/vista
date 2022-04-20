@@ -35,3 +35,32 @@ img {
     
   }
 }
+
+.profileButton{
+  border-radius: 35px;
+  cursor: pointer;
+  border: 0;
+  font-size: 16px;
+  padding: 14px;
+  margin-right: 30px;
+  font-weight: bold;
+  background-color: #FFE194;
+}
+
+.profileButton:hover:not(.stateactive){
+  background-color:#FDFFA9;
+}
+
+.profileButtons{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 30px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.stateactive{
+  background-color:#FFB319;
+}
+        
+
