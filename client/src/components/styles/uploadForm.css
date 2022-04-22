@@ -28,7 +28,7 @@ input[type="file"] {
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #79B4B7;
+  background-color: #FFB319;
   transition: 0.4s;
 }
 .effect-2:focus ~ .focus-border {
@@ -44,7 +44,6 @@ input[type="file"] {
   font-size: 16px;
   border: 1px solid #eee;
   border-radius: 6px;
-  box-shadow: 5px 5px 5px rgb(255, 253, 253);
   text-shadow: none;
   height: 45px;
   width: 85px;
@@ -54,7 +53,6 @@ input[type="file"] {
   background: #FFB319;
   border: 1px solid #eee;
   border-radius: 6px;
-  box-shadow: 2px 3px 4px rgb(0, 0, 0);
   text-shadow: none;
   height: 45px;
   width: 85px;

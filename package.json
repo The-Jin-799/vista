@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@metamask/detect-provider": "^1.2.0",
-    "ipfs-api": "^26.1.2"
+    "ipfs-api": "^26.1.2",
+    "react-image-process": "^0.2.4"
   }
 }
