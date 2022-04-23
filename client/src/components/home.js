@@ -65,8 +65,8 @@ class Home extends Component {
             mode="waterMark"
             waterMarkType="image"
             waterMark={watermark}
-            width={800}
-            height={500}
+            width={3250}
+            height={2250}
             opacity={0.7}
           >
             <img
