@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./styles/imageUpload.css";
-import web3 from "web3";
-import ReactImageProcess from "react-image-process";
+import { saveAs } from "file-saver";
 class Profile extends Component {
   state = {
     uploadedImages: [],
@@ -20,6 +19,10 @@ class Profile extends Component {
       .get()
       .call({ from: this.state.accounts[0] });
     this.setState({ uploadedImages });
+  };
+
+  downloadImage = (URL, fileName) => {
+    saveAs(URL, fileName);
   };
 
   getBoughtImages = async () => {
@@ -60,17 +63,21 @@ class Profile extends Component {
             </span>
             <h2>{props.image.title}</h2>
           </div>
-          <ReactImageProcess >
-            <img
-              className="modal-body"
-              src={`https://cloudflare-ipfs.com/ipfs/${props.image.hash}`}
-            />
-          </ReactImageProcess>
-          <div className="modal-footer">
-            <h3> Free</h3>
+
+          <img
+            className="modal-body"
+            src={`https://cloudflare-ipfs.com/ipfs/${props.image.hash}`}
+          />
+
+          <div className="modal-footer ">
             <button
-              onClick={() => this.buyImage(props.id, props.image.price)}
-              className="modalbutton"
+              className="modalbutton image-download-button"
+              onClick={() =>
+                this.downloadImage(
+                  `https://cloudflare-ipfs.com/ipfs/${props.image.hash}`,
+                  props.image.title
+                )
+              }
             >
               Download
             </button>
@@ -87,13 +94,15 @@ class Profile extends Component {
 
   render() {
     return (
-      <div onClick={(event) =>
-        event.target.className == "modal"
-          ? this.state.showModal
-            ? this.setState({ showModal: false })
+      <div
+        onClick={(event) =>
+          event.target.className == "modal"
+            ? this.state.showModal
+              ? this.setState({ showModal: false })
+              : null
             : null
-          : null
-      }>
+        }
+      >
         <div className="profileButtons">
           <button
             className={
@@ -153,7 +162,7 @@ class Profile extends Component {
               {this.state.boughtImages.map((image, i) => (
                 <div key={i} className="mItem">
                   <img
-                  onClick={() => this.showImageModal(image, i)}
+                    onClick={() => this.showImageModal(image, i)}
                     key={i}
                     className="img"
                     src={`https://cloudflare-ipfs.com/ipfs/${image.hash}`}
@@ -165,7 +174,7 @@ class Profile extends Component {
             </div>
           </div>
         )}
-                {this.state.showModal ? (
+        {this.state.showModal ? (
           <this.Imagemodal
             image={this.state.selectedImage}
             id={this.state.selectedId}
