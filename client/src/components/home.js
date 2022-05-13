@@ -13,9 +13,22 @@ class Home extends Component {
     showModal: false,
     selectedImage: null,
     selectedId: null,
+    EthUsd: 1,
   };
 
   componentDidMount = async () => {
+    let EthUsd;
+    fetch(
+      "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,JPY,EUR"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        EthUsd = data.USD;
+        console.log(data);
+        this.setState({ EthUsd });
+        console.log(this.state.EthUsd);
+      });
+
     await this.getBoughtImages();
     const allImages = await this.state.contract.methods
       .getALL()
@@ -124,7 +137,13 @@ class Home extends Component {
                     />
                     <h1 className="title">{image.title}</h1>
                     <h1 className="price">
-                      {web3.utils.fromWei(image.price, "gwei")} Gwei
+                      {web3.utils.fromWei(image.price, "ether")} ETH ($
+                      {this.state.EthUsd &&
+                        Math.round(
+                          web3.utils.fromWei(image.price, "ether") *
+                            this.state.EthUsd
+                        ).toFixed(2)}
+                      )
                     </h1>
                     <p>
                       <button onClick={() => this.buyImage(i, image.price)}>

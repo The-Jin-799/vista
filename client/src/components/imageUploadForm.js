@@ -19,7 +19,7 @@ class ImageUploadForm extends Component {
   runExample = async (ipfsHash) => {
     console.log(ipfsHash);
     const { accounts, contract } = this.state;
-    const priceInWei = web3.utils.toWei(this.state.price, "gwei");
+    const priceInWei = web3.utils.toWei(this.state.price, "ether");
     // Stores a given value, 5 by default.
     await contract.methods
       .set(ipfsHash, this.state.title, priceInWei)
@@ -129,7 +129,7 @@ class ImageUploadForm extends Component {
                   <input
                     className="effect-2"
                     type="number"
-                    placeholder="Price in Gwei"
+                    placeholder="Price in ETH"
                     onChange={this.handlePrice}
                   />
                   <span className="focus-border"></span>
