@@ -6,6 +6,7 @@ contract SimpleStorage {
     struct Image {
         address uploader;
         string hash;
+        string phash;
         string title;
         uint256 price;
         uint256 timestamp;
@@ -19,11 +20,13 @@ contract SimpleStorage {
 
     function set(
         string memory _hash,
+        string memory _phash,
         string memory _title,
         uint256 _price
     ) public {
         upload.uploader = msg.sender;
         upload.hash = _hash;
+        upload.phash = _phash;
         upload.title = _title;
         upload.price = _price;
         upload.timestamp = block.timestamp;

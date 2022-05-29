@@ -66,7 +66,7 @@ class Profile extends Component {
 
           <img
             className="modal-body"
-            src={`https://cloudflare-ipfs.com/ipfs/${props.image.hash}`}
+            src={`https://infura-ipfs.io/ipfs/${props.image.hash}`}
           />
 
           <div className="modal-footer ">
@@ -74,7 +74,7 @@ class Profile extends Component {
               className="modalbutton image-download-button"
               onClick={() =>
                 this.downloadImage(
-                  `https://cloudflare-ipfs.com/ipfs/${props.image.hash}`,
+                  `https://infura-ipfs.io/ipfs/${props.image.hash}`,
                   props.image.title
                 )
               }
@@ -146,7 +146,7 @@ class Profile extends Component {
                   <img
                     key={i}
                     className="img"
-                    src={`https://cloudflare-ipfs.com/ipfs/${hash}`}
+                    src={`https://infura-ipfs.io/ipfs/${hash}`}
                     alt=""
                     loading="lazy"
                   />

@@ -88,7 +88,18 @@ class Home extends Component {
             />
           </ReactImageProcess>
           <div className="modal-footer">
-            <h3>{web3.utils.fromWei(props.image.price, "gwei")} Gwei</h3>
+            <h3>
+              {web3.utils.fromWei(props.image.price, "ether")} ETH (
+              <em>
+                $
+                {this.state.EthUsd &&
+                  Math.round(
+                    web3.utils.fromWei(props.image.price, "ether") *
+                      this.state.EthUsd
+                  ).toFixed(2)}
+              </em>
+              )
+            </h3>
             <button
               onClick={() => this.buyImage(props.id, props.image.price)}
               className="modalbutton"

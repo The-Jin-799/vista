@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import web3 from "web3";
 import ipfs from "./ipfs";
 import "./styles/uploadForm.css";
+var imgphash = require("imgphash");
+
 class ImageUploadForm extends Component {
   state = {
     title: "",
@@ -14,17 +16,58 @@ class ImageUploadForm extends Component {
     uploadedImages: [],
     image1hash: [],
     imageURL: "",
+    allImages: [],
+    imagePhash: "",
+    iscopyright: true,
   };
 
+  componentDidMount = async () => {
+    const allImages = await this.state.contract.methods
+      .getALL()
+      .call({ from: this.state.accounts[0] });
+    this.setState({ allImages });
+  };
+
+  checkCopyRight = () => {
+    this.state.allImages.map((image) => {
+      const minLength = Math.min(
+        this.state.imagePhash.length,
+        image.phash.length
+      );
+      const maxLength = Math.max(
+        this.state.imagePhash.length,
+        image.phash.length
+      );
+      let similarity = 0;
+      for (let i = 0; i < minLength; i++) {
+        if (this.state.imagePhash[i] === image.phash[i]) {
+          similarity += 1;
+        }
+      }
+      const hammingdistance = similarity / maxLength;
+      console.log("hamming dist:  " + hammingdistance);
+      if (hammingdistance >= 0.625) {
+        console.log("copy imagephash: " + image.phash);
+        this.setState({ iscopyright: false });
+      }
+    });
+  };
   runExample = async (ipfsHash) => {
+    const copyright = this.checkCopyRight();
+    console.log("copyright value: " + this.state.iscopyright);
+    if (!this.state.iscopyright) {
+      window.alert("Duplicate Image! Try another image");
+      window.location.reload();
+      return;
+    }
     console.log(ipfsHash);
     const { accounts, contract } = this.state;
     const priceInWei = web3.utils.toWei(this.state.price, "ether");
     // Stores a given value, 5 by default.
     await contract.methods
-      .set(ipfsHash, this.state.title, priceInWei)
+      .set(ipfsHash, this.state.imagePhash, this.state.title, priceInWei)
       .send({ from: accounts[0] });
-
+    window.location.reload();
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.get().call();
 
@@ -37,7 +80,7 @@ class ImageUploadForm extends Component {
   //   this.setState({ uploadedImages });
   // };
 
-  captureFile = (event) => {
+  captureFile = async (event) => {
     event.preventDefault();
     const file = event.target.files[0];
     this.setState({
@@ -45,9 +88,13 @@ class ImageUploadForm extends Component {
     });
     const reader = new window.FileReader();
     reader.readAsArrayBuffer(file);
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       this.setState({ buffer: Buffer(reader.result) });
       console.log("buffer", this.state.buffer);
+      const image = new imgphash.HashImage(this.state.buffer);
+      const imagephash = await image.phash();
+      this.setState({ imagePhash: imagephash.hash });
+      console.log("perc hash: " + imagephash.hash);
     };
   };
 
@@ -129,6 +176,7 @@ class ImageUploadForm extends Component {
                   <input
                     className="effect-2"
                     type="number"
+                    step="any"
                     placeholder="Price in ETH"
                     onChange={this.handlePrice}
                   />
