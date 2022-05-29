@@ -84,7 +84,7 @@ class Home extends Component {
           >
             <img
               className="modal-body"
-              src={`https://cloudflare-ipfs.com/ipfs/${props.image.hash}`}
+              src={`https://infura-ipfs.io/ipfs/${props.image.hash}`}
             />
           </ReactImageProcess>
           <div className="modal-footer">
@@ -142,7 +142,7 @@ class Home extends Component {
                     <img
                       onClick={() => this.showImageModal(image, i)}
                       className="img"
-                      src={`https://cloudflare-ipfs.com/ipfs/${image.hash}`}
+                      src={`https://infura-ipfs.io/ipfs/${image.hash}`}
                       alt=""
                       loading="lazy"
                     />
