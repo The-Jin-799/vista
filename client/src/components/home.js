@@ -52,6 +52,7 @@ class Home extends Component {
       from: this.state.accounts[0],
       value: price,
     });
+
     console.log(i + ":" + price);
   };
 
@@ -78,8 +79,8 @@ class Home extends Component {
             mode="waterMark"
             waterMarkType="image"
             waterMark={watermark}
-            width={3250}
-            height={2250}
+            width={1250}
+            height={850}
             opacity={0.7}
           >
             <img
@@ -101,7 +102,9 @@ class Home extends Component {
               )
             </h3>
             <button
-              onClick={() => this.buyImage(props.id, props.image.price)}
+              onClick={() => {
+                this.buyImage(props.id, props.image.price);
+              }}
               className="modalbutton"
             >
               Buy Now

@@ -21,9 +21,6 @@ function Navbar(props) {
           Image Upload
         </a>
       </li>
-      <li>
-        <a href="#contact">Contact</a>
-      </li>
       <li style={{ float: "right" }}>
         <a
           className={

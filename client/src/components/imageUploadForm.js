@@ -46,7 +46,7 @@ class ImageUploadForm extends Component {
       }
       const hammingdistance = similarity / maxLength;
       console.log("hamming dist:  " + hammingdistance);
-      if (hammingdistance >= 0.625) {
+      if (hammingdistance >= 0.66) {
         console.log("copy imagephash: " + image.phash);
         this.setState({ iscopyright: false });
       }
