@@ -165,7 +165,7 @@ class Profile extends Component {
                     onClick={() => this.showImageModal(image, i)}
                     key={i}
                     className="img"
-                    src={`https://cloudflare-ipfs.com/ipfs/${image.hash}`}
+                    src={`https://infura-ipfs.io/ipfs/${image.hash}`}
                     alt=""
                     loading="lazy"
                   />

@@ -79,9 +79,10 @@ class Home extends Component {
             mode="waterMark"
             waterMarkType="image"
             waterMark={watermark}
-            width={1250}
-            height={850}
+            width={300}
+            height={500}
             opacity={0.7}
+            coordinate={[0, -50]}
           >
             <img
               className="modal-body"
