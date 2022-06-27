@@ -28,7 +28,7 @@ input[type="file"] {
   left: 50%;
   width: 0;
   height: 2px;
-  background-color: #4caf50;
+  background-color: #FFB319;
   transition: 0.4s;
 }
 .effect-2:focus ~ .focus-border {
@@ -38,22 +38,21 @@ input[type="file"] {
 }
 
 .form-submit-button {
-  background: #333;
-  color: #fff;
+  background: #FFE194;
+  color: #000;
+  font-weight: bolder;
+  font-size: 16px;
   border: 1px solid #eee;
   border-radius: 6px;
-  box-shadow: 5px 5px 5px #eee;
   text-shadow: none;
   height: 45px;
   width: 85px;
 }
 .form-submit-button:hover {
   cursor: pointer;
-  background: #1060d3;
-  color: #fff;
+  background: #FFB319;
   border: 1px solid #eee;
   border-radius: 6px;
-  box-shadow: 5px 5px 5px #eee;
   text-shadow: none;
   height: 45px;
   width: 85px;

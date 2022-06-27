@@ -66,7 +66,15 @@ class App extends Component {
           <Navbar address={this.state.accounts[0]} />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={
+                  <Home
+                    accounts={this.state.accounts}
+                    contract={this.state.contract}
+                  />
+                }
+              />
               <Route
                 path="imageupload"
                 element={

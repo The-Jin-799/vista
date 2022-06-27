@@ -4,16 +4,30 @@ function Navbar(props) {
   return (
     <ul>
       <li>
-        <a href="/">Vista</a>
+        <a
+          className={window.location.pathname === "/" ? "active" : "link"}
+          href="/"
+        >
+          Vista
+        </a>
       </li>
       <li>
-        <a href="imageupload">Image Upload</a>
-      </li>
-      <li>
-        <a href="#contact">Contact</a>
+        <a
+          className={
+            window.location.pathname === "/imageupload" ? "active" : "link"
+          }
+          href="imageupload"
+        >
+          Image Upload
+        </a>
       </li>
       <li style={{ float: "right" }}>
-        <a className="active" href="profile">
+        <a
+          className={
+            window.location.pathname === "/profile" ? "active" : "address"
+          }
+          href="profile"
+        >
           {props.address}
         </a>
       </li>
