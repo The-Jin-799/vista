@@ -6,3 +6,4 @@
 
 #hidden files
 .env
+node_modules
