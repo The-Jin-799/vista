@@ -75,11 +75,6 @@ class ImageUploadForm extends Component {
     this.setState({ storageValue: response });
   };
 
-  // getUploadedImages = async () => {
-  //   const uploadedImages = await this.state.contract.methods.get().call();
-  //   this.setState({ uploadedImages });
-  // };
-
   captureFile = async (event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -98,15 +93,6 @@ class ImageUploadForm extends Component {
     };
   };
 
-  // componentDidMount = async () => {
-  //   await this.getUploadedImages();
-  //   console.log(this.state.uploadedImages[0].hash);
-  //   let ImageArray = this.state.uploadedImages.map((obj) => {
-  //     return obj.hash;
-  //   });
-  //   this.setState({ image1hash: ImageArray });
-  // };
-
   onSubmit = (event) => {
     event.preventDefault();
     ipfs.files.add(this.state.buffer, async (error, result) => {
@@ -117,7 +103,6 @@ class ImageUploadForm extends Component {
       this.setState({ ipfsHash: result[0].hash });
 
       console.log("ifpsHash", this.state.ipfsHash);
-      //let CID = await "helloworld"
       await this.runExample(this.state.ipfsHash);
     });
   };
@@ -167,11 +152,7 @@ class ImageUploadForm extends Component {
                   />
                   <span className="focus-border"></span>
                 </div>
-                {/* <input
-                  type="text"
-                  placeholder="Image Title"
-                  onChange={this.handleImageTitle}
-                /> */}
+
                 <div className="col-3">
                   <input
                     className="effect-2"
@@ -182,14 +163,8 @@ class ImageUploadForm extends Component {
                   />
                   <span className="focus-border"></span>
                 </div>
-                {/* <input
-                  type="number"
-                  placeholder="Price in Gwei"
-                  onChange={this.handlePrice}
-                /> */}
                 <input className="form-submit-button" type="submit" />
               </form>
-              {/* <p>{this.state.storageValue}</p> */}
             </div>
           </div>
         </main>
