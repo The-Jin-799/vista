@@ -1,0 +1,42 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "fs": "^0.0.1-security",
+    "hamming": "^0.0.2",
+    "image-hash": "^5.3.1",
+    "imagemagick": "^0.1.3",
+    "imghash": "^0.0.9",
+    "imgphash": "^0.4.0",
+    "phash-js": "^0.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "3.2.0",
+    "wasm-imagemagick": "^1.2.8",
+    "web3": "^1.6.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
